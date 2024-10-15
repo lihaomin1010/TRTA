@@ -1,8 +1,10 @@
 import random
 import torch
 import numpy as np
+import gymnasium as gym
+import panda_gym
 from tqdm import tqdm
-import matplotlib. pyplot as plt
+import matplotlib.pyplot as plt
 
 from env.online.mw_basketball import MWBasketball
 
@@ -11,36 +13,42 @@ from buffer.old import HER
 from algo.policy_based import ddpg
 
 if __name__ == '__main__':
+    env = gym.make('PandaReach-v3')
+    env.reset()
+
     actor_lr = 1e-3
-    critic_lr = 1e-3
+    critic_lr = 2e-3
     hidden_dim = 256
 
-    goal_dim = 3
-    state_dim = 39 + goal_dim
-    action_dim = 4
+    goal_dim = env.observation_space['achieved_goal'].shape[0]
+    state_dim = env.observation_space['observation'].shape[0] + 2 * goal_dim
+    action_dim = env.action_space.shape[0]
     action_bound = 1
 
     sigma = 0.1
     tau = 0.005
-    gamma = 0.98
+    gamma = 0.99
     num_episodes = 2000
     n_train = 20
-    batch_size = 512
+    batch_size = 64
     ###############################
-    minimal_episodes = 1
-    buffer_size = 10000
+    minimal_episodes = 100
+    buffer_size = 100000
     device = torch.device("cuda") if torch.cuda.is_available() else torch.device(
         "cpu")
 
     random.seed(0)
     np.random.seed(0)
     torch.manual_seed(0)
-    env = MWBasketball()
-    env.reset()
 
     replay_buffer = HER.ReplayBuffer_Trajectory(buffer_size)
+    experience_buffer = dict(states=[],
+                     actions=[],
+                     next_states=[],
+                     rewards=[],
+                     dones=[])
     agent = ddpg.DDPG(state_dim, hidden_dim, action_dim, action_bound, actor_lr,
-                 critic_lr, sigma, tau, gamma, device)
+                      critic_lr, sigma, tau, gamma, device)
 
     return_list = []
     for i in range(10):
@@ -48,26 +56,31 @@ if __name__ == '__main__':
             rr = []
             for i_episode in range(int(num_episodes / 10)):
                 episode_return = 0
-                state = env.reset()
+                state, _ = env.reset()
                 traj = HER.Trajectory(state)
                 done = False
+                truncated = False
 
-                max_steps = 500
+                #max_steps = 500
                 steps = 0
 
-                while not done and steps < max_steps:
+                while not (done or truncated):
                     steps += 1
-                    action = agent.take_action(state)
-                    state, reward, done = env.step(action)
+                    o = state['observation']
+                    ag = state['achieved_goal']
+                    dg = state['desired_goal']
+                    action = agent.take_action(np.concatenate((o, ag, dg)))
+                    state, reward, done, truncated, _ = env.step(action)
                     rr.append(reward)
                     episode_return += reward
                     traj.store_step(action, state, reward, done)
                 replay_buffer.add_trajectory(traj)
                 return_list.append(episode_return)
                 if replay_buffer.size() >= minimal_episodes:
-                    for _ in range(n_train):
-                        transition_dict = replay_buffer.sample(batch_size, True)
-                        agent.update(transition_dict)
+                    replay_buffer.sample(batch_size=64, use_her=True, task=env.env.env.env.task, batch=experience_buffer)
+                    for _ in range(64):
+                        current_experience_buffer = replay_buffer.small_sample(batch_size, experience_buffer)
+                        agent.update(current_experience_buffer)
                 if (i_episode + 1) % 10 == 0:
                     pbar.set_postfix({
                         'episode':

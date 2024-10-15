@@ -5,18 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="aa7e1789-7323-4f0c-a3a2-971ab6dc2924" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/TRTA.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/buffer/new/adjacent-trajectory.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/env/online/mw_basketball.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/experiment/mw-basketball.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/output/her.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/other.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/experiment/HER-demo2.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/experiment/HER-demo3.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/buffer/old/HER.py" beforeDir="false" afterPath="$PROJECT_DIR$/buffer/old/HER.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/her-demo.py" beforeDir="false" afterPath="$PROJECT_DIR$/experiment/her-demo.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/experiment/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/experiment/mw-basketball.py" beforeDir="false" afterPath="$PROJECT_DIR$/experiment/mw-basketball.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,13 +37,16 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Python.HER-demo3.executor": "Debug",
+    "Python.HER.executor": "Run",
     "Python.her-demo.executor": "Debug",
     "Python.main.executor": "Run",
-    "Python.mw-basketball.executor": "Run",
+    "Python.mw-basketball.executor": "Debug",
     "Python.mw-demo (1).executor": "Debug",
     "Python.mw-demo.executor": "Run",
     "Python.mw_basketball.executor": "Debug",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "main",
     "last_opened_file_path": "//wsl$/Ubuntu/home/lihaomin/workspace/TRTA",
     "node.js.detected.package.eslint": "true",
@@ -66,7 +63,53 @@
       <recent name="\\wsl$\Ubuntu\home\lihaomin\workspace\TRTA\experiment" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.mw-basketball">
+  <component name="RunManager" selected="Python.HER-demo3">
+    <configuration name="HER-demo3" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="TRTA" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/experiment" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/experiment/HER-demo3.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="HER" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="TRTA" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/buffer/old" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/buffer/old/HER.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="her-demo" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="TRTA" />
       <option name="ENV_FILES" value="" />
@@ -138,8 +181,10 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.mw-basketball" />
+        <item itemvalue="Python.HER-demo3" />
+        <item itemvalue="Python.HER" />
         <item itemvalue="Python.mw_basketball" />
+        <item itemvalue="Python.mw-basketball" />
         <item itemvalue="Python.her-demo" />
       </list>
     </recent_temporary>
@@ -163,7 +208,8 @@
       <workItem from="1728877125285" duration="3328000" />
       <workItem from="1728907102125" duration="1483000" />
       <workItem from="1728956167752" duration="6024000" />
-      <workItem from="1728962246209" duration="1702000" />
+      <workItem from="1728962246209" duration="6739000" />
+      <workItem from="1728976733042" duration="2491000" />
     </task>
     <servers />
   </component>
@@ -174,18 +220,40 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$USER_HOME$/AppData/Local/JetBrains/PyCharm2024.1/remote_sources/-851136193/-561026155/metaworld/envs/mujoco/sawyer_xyz/sawyer_xyz_env.py</url>
-          <line>571</line>
-          <option name="timeStamp" value="25" />
+          <url>file://$PROJECT_DIR$/experiment/mw-basketball.py</url>
+          <line>70</line>
+          <option name="timeStamp" value="31" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/env/online/mw_basketball.py</url>
+          <line>24</line>
+          <option name="timeStamp" value="33" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/experiment/HER-demo3.py</url>
+          <line>81</line>
+          <option name="timeStamp" value="51" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/buffer/old/HER.py</url>
+          <line>65</line>
+          <option name="timeStamp" value="54" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
+    <watches-manager>
+      <configuration name="PythonConfigurationType">
+        <watch expression="np.concatenate(o, ag, fg)" />
+      </configuration>
+    </watches-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/TRTA$HER_demo3.coverage" NAME="HER-demo3 Coverage Results" MODIFIED="1728979184576" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/experiment" />
     <SUITE FILE_PATH="coverage/TRTA$main.coverage" NAME="main Coverage Results" MODIFIED="1728877982328" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/TRTA$mw_demo__1_.coverage" NAME="mw-demo (1) Coverage Results" MODIFIED="1728958214885" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/env/complex-online" />
-    <SUITE FILE_PATH="coverage/TRTA$mw_basketball.coverage" NAME="mw-basketball Coverage Results" MODIFIED="1728962903671" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/experiment" />
+    <SUITE FILE_PATH="coverage/TRTA$mw_basketball.coverage" NAME="mw_basketball Coverage Results" MODIFIED="1728975006627" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/env/online" />
     <SUITE FILE_PATH="coverage/TRTA$her_demo.coverage" NAME="her-demo Coverage Results" MODIFIED="1728899512068" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/TRTA$HER.coverage" NAME="HER Coverage Results" MODIFIED="1728979150158" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/buffer/old" />
     <SUITE FILE_PATH="coverage/TRTA$mw_demo.coverage" NAME="mw-demo Coverage Results" MODIFIED="1728956235739" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/env/ complex-online" />
   </component>
 </project>

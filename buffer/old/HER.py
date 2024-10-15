@@ -30,37 +30,50 @@ class ReplayBuffer_Trajectory:
     def size(self):
         return len(self.buffer)
 
-    def sample(self, batch_size, use_her, dis_threshold=0.08, her_ratio=0.8):
-        batch = dict(states=[],
+    def sample(self, batch_size, use_her, task, batch, dis_threshold=0.08, her_ratio=0.8, k=4):
+        for _ in range(batch_size):
+            traj = random.sample(self.buffer, 1)[0]
+            for _ in range(k):
+                step_state = np.random.randint(traj.length)
+                state = np.concatenate((traj.states[step_state]['observation'], traj.states[step_state]['achieved_goal'], traj.states[step_state]['desired_goal']))
+                next_state = np.concatenate((traj.states[step_state+1]['observation'], traj.states[step_state+1]['achieved_goal'], traj.states[step_state+1]['desired_goal']))
+                action = traj.actions[step_state]
+                reward = traj.rewards[step_state]
+                done = traj.dones[step_state]
+
+                if use_her and np.random.uniform() <= her_ratio:
+                    step_goal = np.random.randint(step_state, traj.length)
+                    dg = traj.states[step_goal+1]['achieved_goal']
+
+
+                    reward = task.compute_reward(dg, dg, 1.0)
+                    done = True
+                    state = np.concatenate((traj.states[step_goal]['observation'], traj.states[step_goal]['achieved_goal'], dg))
+                    next_state = np.concatenate((traj.states[step_goal+1]['observation'], dg, dg))
+
+                batch['states'].append(state)
+                batch['next_states'].append(next_state)
+                batch['actions'].append(action)
+                batch['rewards'].append(reward)
+                batch['dones'].append(done)
+
+            #batch['states'] = np.array(batch['states'])
+            #batch['next_states'] = np.array(batch['next_states'])
+            #batch['actions'] = np.array(batch['actions'])
+        return batch
+
+    def small_sample(self, batch_size, buffer):
+        idx = np.random.choice(len(buffer['dones']), batch_size, replace=False)
+        new_buffer = dict(states=[],
                      actions=[],
                      next_states=[],
                      rewards=[],
                      dones=[])
-        for _ in range(batch_size):
-            traj = random.sample(self.buffer, 1)[0]
-            step_state = np.random.randint(traj.length)
-            state = traj.states[step_state]
-            next_state = traj.states[step_state + 1]
-            action = traj.actions[step_state]
-            reward = traj.rewards[step_state]
-            done = traj.dones[step_state]
+        for i in idx:
+            new_buffer['states'].append(buffer['states'][i])
+            new_buffer['actions'].append(buffer['actions'][i])
+            new_buffer['rewards'].append(buffer['rewards'][i])
+            new_buffer['dones'].append(buffer['dones'][i])
+            new_buffer['next_states'].append(buffer['next_states'][i])
+        return new_buffer
 
-            if use_her and np.random.uniform() <= her_ratio:
-                step_goal = np.random.randint(step_state + 1, traj.length + 1)
-                goal = traj.states[step_goal][4:7]  # 使用HER算法的future方案设置目标
-                dis = np.sqrt(np.sum(np.square(next_state[4:7] - goal)))
-                reward = reward if dis > dis_threshold else 10
-                done = False if dis > dis_threshold else True
-                state = np.hstack((state[0:4], goal, state[7:]))
-                next_state = np.hstack((next_state[0:4], goal, next_state[7:]))
-
-            batch['states'].append(state)
-            batch['next_states'].append(next_state)
-            batch['actions'].append(action)
-            batch['rewards'].append(reward)
-            batch['dones'].append(done)
-
-        batch['states'] = np.array(batch['states'])
-        batch['next_states'] = np.array(batch['next_states'])
-        batch['actions'] = np.array(batch['actions'])
-        return batch
