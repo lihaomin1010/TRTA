@@ -22,6 +22,7 @@ class Trajectory:
 class ReplayBuffer_Trajectory:
     ''' 存储轨迹的经验回放池 '''
     def __init__(self, capacity):
+        self.goals = []
         self.buffer = collections.deque(maxlen=capacity)
 
     def add_trajectory(self, trajectory):

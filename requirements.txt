@@ -2,3 +2,4 @@ matplotlib==3.7.2
 numpy==1.22.0
 torch==2.0.1
 tqdm==4.65.0
+metaworld==2.0.0
