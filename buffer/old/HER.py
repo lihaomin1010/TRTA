@@ -48,6 +48,7 @@ class ReplayBuffer_Trajectory:
 
                     reward = task.compute_reward(dg, dg, 1.0)
                     done = True
+                    action = traj.actions[step_goal]
                     state = np.concatenate((traj.states[step_goal]['observation'], traj.states[step_goal]['achieved_goal'], dg))
                     next_state = np.concatenate((traj.states[step_goal+1]['observation'], dg, dg))
 

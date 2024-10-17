@@ -14,12 +14,6 @@ class PolicyNet(torch.nn.Module):
         x = F.relu(self.fc2(F.relu(self.fc1(x))))
         return torch.tanh(self.fc3(x)) * self.action_bound
 
-    def _initialize_weights(self):
-        for m in self.modules():
-            if isinstance(m, torch.nn.Linear):
-                torch.nn.init.xavier_uniform_(m.weight)
-                torch.nn.init.zeros_(m.bias)
-
 
 class QValueNet(torch.nn.Module):
     def __init__(self, state_dim, hidden_dim, action_dim):
@@ -32,12 +26,6 @@ class QValueNet(torch.nn.Module):
         cat = torch.cat([x, a], dim=1)  # 拼接状态和动作
         x = F.relu(self.fc2(F.relu(self.fc1(cat))))
         return self.fc3(x)
-
-    def _initialize_weights(self):
-        for m in self.modules():
-            if isinstance(m, torch.nn.Linear):
-                torch.nn.init.xavier_uniform_(m.weight)
-                torch.nn.init.zeros_(m.bias)
 
 class DDPG:
     ''' DDPG算法 '''

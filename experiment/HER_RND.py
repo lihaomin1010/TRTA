@@ -13,7 +13,7 @@ from buffer.old import HER
 from algo.policy_based import ddpg
 
 if __name__ == '__main__':
-    env = gym.make('FetchReach-v3')
+    env = gym.make('FetchPush-v2')
     env.reset()
 
     actor_lr = 1e-3
@@ -32,7 +32,8 @@ if __name__ == '__main__':
     n_train = 20
     batch_size = 64
     ###############################
-    minimal_episodes = 10
+    minimal_rnd_episodes = 50
+    minimal_her_episodes = 150
     buffer_size = 100000
     device = torch.device("cuda") if torch.cuda.is_available() else torch.device(
         "cpu")
@@ -78,9 +79,9 @@ if __name__ == '__main__':
                 return_list.append(episode_return)
                 if replay_buffer.size() >= minimal_episodes:
                     replay_buffer.sample(batch_size=64, use_her=True, task=env.env.env.env, batch=experience_buffer)
-                    for _ in range(32):
-                        #current_experience_buffer = replay_buffer.small_sample(batch_size, experience_buffer)
-                        agent.update(experience_buffer)
+                    for _ in range(64):
+                        current_experience_buffer = replay_buffer.small_sample(batch_size, experience_buffer)
+                        agent.update(current_experience_buffer)
                 if (i_episode + 1) % 10 == 0:
                     pbar.set_postfix({
                         'episode':
