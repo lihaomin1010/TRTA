@@ -347,5 +347,3 @@ def main():
             torch.save(rnd.target.state_dict(), target_path)
 
 
-if __name__ == '__main__':
-    main()

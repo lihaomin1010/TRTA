@@ -13,6 +13,7 @@ class Agent:
         self.train_n = train_n
         self.use_her = False
         self.use_rnd = False
+        self.use_weight_sample = True
 
     # for test data
     def select_action(self, state):
@@ -28,7 +29,9 @@ class Agent:
     def learn(self):
         for _ in range(self.train_n):
             if self.use_her:
-                trans_dict = self.buffer.her_sample(self.env)
+                trans_dict = self.buffer.her_sample()
+            elif self.use_weight_sample:
+                trans_dict = self.buffer.weight_sample()
             else:
                 trans_dict = self.buffer.simple_sample()
             self.update(trans_dict)
@@ -44,7 +47,7 @@ class Agent:
                                    dtype=torch.float).to(self.device)
 
         if self.use_rnd:
-            intrinsic_reward = self.in_policy.compute_intrinsic_reward(states, next_states)
+            intrinsic_reward = self.in_policy.compute_intrinsic_reward(torch.stack((states, actions)), next_states)
 
             rewards += 10*intrinsic_reward
 
@@ -63,7 +66,7 @@ class Agent:
 
         # 训练 RND
         if self.use_rnd:
-            self.in_policy.update(states, next_states)
+            self.in_policy.update(torch.stack((states, actions)), next_states)
 
         # 策略网络就是为了使Q值最大化
         actor_loss = -torch.mean(self.ex_policy.critic(states, self.ex_policy.actor(states)))

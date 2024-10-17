@@ -39,19 +39,19 @@ if __name__ == "__main__":
 
     ##############
 
-    #env = gym.make('FetchReach-v3', render_mode='human')
+    env = gym.make('FetchPush-v2', render_mode='human')
 
-    env = gym.make('FetchReach-v3')
+    #env = gym.make('FetchPush-v2')
     goal_dim = env.observation_space['achieved_goal'].shape[0]
     state_dim = env.observation_space['observation'].shape[0] + 2 * goal_dim
     action_dim = env.action_space.shape[0]
 
-    intrinsic_policy = rnd.RNDModel(state_dim, device)
+    intrinsic_policy = rnd.RNDModel(state_dim+action_dim, device)
 
     extrinsic_policy = ddpg.DDPG(state_dim, hidden_dim, action_dim, action_bound,
                                  actor_lr, critic_lr, sigma, tau, gamma, device)
 
-    replay_buffer = buffer.ReplayBuffer_Trajectory(capacity=10000, batch_size=batch_size)
+    replay_buffer = buffer.ReplayBuffer_Trajectory(capacity=10000, batch_size=batch_size, env=env.env.env.env)
 
     agent = agent.Agent(intrinsic_policy, extrinsic_policy, replay_buffer, env,  device)
 
